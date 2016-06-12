@@ -12,9 +12,10 @@ export class Appartment extends Component {
     const diff = Math.abs(window.guess.value - appartment.soldPrice)
     let score = (((appartment.soldPrice-diff)/appartment.soldPrice) * 100)
     score = Math.floor(Math.min(Math.max(score, 0), 100));
+    this.props.setScore(score);
   }
   render() {
-    const { appartment } = this.props;
+    const { appartment, score } = this.props;
     if(appartment) {
       return (
         <div id="app">
@@ -48,8 +49,9 @@ export class Appartment extends Component {
               we should show a map here
             </div>
             <div className="clear-both">
-              Gissa slutpriset: <input id="guess" type="text" /> <button onClick={this.guess.bind(this)}>gissa</button>
+              Gissa slutpriset: <input id="guess" type="text" /> <button onClick={this.guess.bind(this)}>gissa</button> Poäng: {score}
             </div>
+            <button onClick={this.props.loadAppartment}>Ny bostad</button>
           </div>
         </div>
       )
@@ -60,7 +62,8 @@ export class Appartment extends Component {
 
 function mapStateToProps(state) {
   return {
-    appartment: state.appartment
+    appartment: state.appartment,
+    score: state.score
   }
 }
 
