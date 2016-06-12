@@ -11,7 +11,7 @@ export class Appartment extends Component {
     const { appartment } = this.props;
     const diff = Math.abs(window.guess.value - appartment.soldPrice)
     let score = (((appartment.soldPrice-diff)/appartment.soldPrice) * 100)
-    let score = Math.floor(Math.min(Math.max(score, 0), 100));
+    score = Math.floor(Math.min(Math.max(score, 0), 100));
   }
   render() {
     const { appartment } = this.props;
