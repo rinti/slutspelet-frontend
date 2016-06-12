@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actions from '../actions';
 
 export class Appartment extends Component {
+  componentDidMount() {
+    this.props.loadAppartment();
+  }
+  gissa() {
+
+  }
   render() {
     const { appartment } = this.props;
     if(appartment) {
@@ -37,7 +45,7 @@ export class Appartment extends Component {
               we should show a map here
             </div>
             <div className="clear-both">
-              Gissa slutpriset: <input type="text" /> 
+              Gissa slutpriset: <input type="text" /> <button onClick={this.guess}>gissa</button>
             </div>
           </div>
         </div>
@@ -53,4 +61,8 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Appartment);
+function mapActionCreatorsToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapActionCreatorsToProps)(Appartment);
