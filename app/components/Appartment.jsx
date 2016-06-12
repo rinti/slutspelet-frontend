@@ -7,8 +7,11 @@ export class Appartment extends Component {
   componentDidMount() {
     this.props.loadAppartment();
   }
-  gissa() {
-
+  guess() {
+    const { appartment } = this.props;
+    const diff = Math.abs(window.guess.value - appartment.soldPrice)
+    let score = (((appartment.soldPrice-diff)/appartment.soldPrice) * 100)
+    let score = Math.floor(Math.min(Math.max(score, 0), 100));
   }
   render() {
     const { appartment } = this.props;
@@ -45,7 +48,7 @@ export class Appartment extends Component {
               we should show a map here
             </div>
             <div className="clear-both">
-              Gissa slutpriset: <input type="text" /> <button onClick={this.guess}>gissa</button>
+              Gissa slutpriset: <input id="guess" type="text" /> <button onClick={this.guess.bind(this)}>gissa</button>
             </div>
           </div>
         </div>
